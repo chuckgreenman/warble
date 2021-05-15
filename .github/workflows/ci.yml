@@ -7,16 +7,15 @@ jobs:
       db:
         image: postgres:11
         ports: ['5432:5432']
+        env:
+          POSTGRES\_USER: postgres
+          POSTGRES\_PASSWORD: postgres
+          POSTGRES\_DB: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 10s
           --health-retries 5
-      redis:
-        image: redis
-        ports: ['6379:6379']
-        options: --entrypoint redis-server
-
     steps:
       - uses: actions/checkout@v1
       - name: Setup Ruby
@@ -37,4 +36,4 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:prepare
-          rspec
+          bundle exec rspec ./spec
