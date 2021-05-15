@@ -23,9 +23,8 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
+      - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.7.0
       - uses: borales/actions-yarn@v2.0.0
